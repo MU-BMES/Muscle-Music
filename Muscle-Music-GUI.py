@@ -6,16 +6,16 @@ import random
 
 #generate random wheel and selects a chord from the wheel putting it in the highlighted tag
 def getChord ():
-    wheelLabel.configure(state = "normal")
-    wheelLabel.delete("1.0", "end")
+    wheelLabel.configure(state = "normal")  # sets wheel to open 
+    wheelLabel.delete("1.0", "end") # clears all previous content 
 
     wheels = ["1", "2", "3", "4", "5"]
     wheel =  wheels[random.randint(0, len(wheels)-1)]
-    wheels = " ".join(wheels)
-    wheelLabel .insert("end", wheels)
-    index = wheels.find(wheel)
-    start_wheel = f"1.{index}"
-    end_wheel = f"1.{index+ 1}"
+    wheels = " ".join(wheels) # creates a string of wheels separated by spaces
+    wheelLabel .insert("end", wheels) # inserts the string of wheels into the textbox
+    index = wheels.find(wheel) # finds the index of the selected wheel
+    start_wheel = f"1.{index}"  #locates the start and end of wheel highlight 
+    end_wheel = f"1.{index+ 1}" 
     wheelLabel.tag_add("highlight", start_wheel, end_wheel)
 
     chordLabel.configure(state = "normal")
@@ -121,5 +121,8 @@ wheelLabel.pack(pady= (0,200))
 wheelLabel.tag_config("highlight", foreground="yellow")
 wheelLabel.configure(state = "disabled")
 
+# Adding Live input label 
+liveInputLabel = ctk.CTkLabel(wheelFrame, text="Live Input", font=font_bold)
+liveInputLabel.pack(pady=(10,200))
 
 app.mainloop()
