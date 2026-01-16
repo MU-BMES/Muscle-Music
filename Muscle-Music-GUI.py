@@ -22,7 +22,7 @@ def getChord ():
     chordLabel.delete("1.0", "end")
 
     if wheel == "1":
-        w1 = ["B", "C#m", "D#m", "E", "F#", "G#m"]
+        w1 = ["B  ", "C#m", "D#m", "E  ", "F#  ", "G#m"]
         chord =  w1[random.randint(0, len(w1)-1)]
         w1 = " ".join(w1)
         chordLabel.insert("end", w1)
@@ -32,7 +32,7 @@ def getChord ():
         chordLabel.tag_add("highlight", start_chord, end_chord)
 
     elif wheel == "2":
-        w2 = ["C", "DDm", "Em", "F", "G", "Am"]
+        w2 = ["C   ", "DDm ", "Em ", "F   ", "G   ", "Am "]
         chord =  w2[random.randint(0, len(w2)-1)]
         w2 = " ".join(w2)
         chordLabel.insert("end", w2)
@@ -42,7 +42,7 @@ def getChord ():
         chordLabel.tag_add("highlight", start_chord, end_chord)
 
     elif wheel  == "3":
-        w3 = ["D♭", "E♭m", "Fm", "G♭", "A♭", "B♭m"]   
+        w3 = ["D♭ ", "E♭m", "Fm ", "G♭ ", "A♭ ", "B♭m"]   
         chord =  w3[random.randint(0, len(w3)-1)]
         w3 = " ".join(w3)
         chordLabel.insert("end", w3)
@@ -52,7 +52,7 @@ def getChord ():
         chordLabel.tag_add("highlight", start_chord, end_chord)
 
     elif wheel == "4":
-        w4 = ["D", "Em", "F#m", "G", "A", "Bm"]
+        w4 = ["D  ", "Em ", "F#m ", "G  ", "A  ", "Bm "]
         chord =  w4[random.randint(0, len(w4)-1)]
         w4 = " ".join(w4)
         chordLabel.insert("end", w4)
@@ -62,7 +62,7 @@ def getChord ():
         chordLabel.tag_add("highlight", start_chord, end_chord)
 
     else:
-        w5 = ["E♭", "Fm", "Gm", "A♭", "B♭", "Cm"]
+        w5 = ["E♭ ", "Fm ", "Gm ", "A♭ ", "B♭ ", "Cm "]
         chord =  w5[random.randint(0, len(w5)-1)]
         w5 = " ".join(w5)
         chordLabel.insert("end", w5)
@@ -102,7 +102,7 @@ guitarImage = ctk.CTkLabel(guitarFrame, image=tkguitar, text="")
 guitarImage.pack( pady=10, padx=100)
 
 # Adding Note label 
-chordLabel= ctk.CTkTextbox(guitarFrame, width=400, height=50, font=font_default, fg_color="transparent")
+chordLabel= ctk.CTkTextbox(guitarFrame, width=500, height=50, font=font_default, fg_color="transparent")
 chordLabel.pack(pady=10, padx=10)
 chordLabel.tag_config("highlight", foreground="yellow")
 chordLabel.configure(state = "disabled")
