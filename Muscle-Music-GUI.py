@@ -5,6 +5,9 @@ import customtkinter as ctk
 import random
 
 #generate random wheel and selects a chord from the wheel putting it in the highlighted tag
+def task():
+    app.after(200, task)  # Schedule the next execution after 200 milliseconds
+
 def getChord ():
     wheelLabel.configure(state = "normal")  # sets wheel to open 
     wheelLabel.delete("1.0", "end") # clears all previous content 
@@ -125,4 +128,5 @@ wheelLabel.configure(state = "disabled")
 liveInputLabel = ctk.CTkLabel(wheelFrame, text="Live Input", font=font_bold)
 liveInputLabel.pack(pady=(10,200))
 
+app.after(200, task)
 app.mainloop()
