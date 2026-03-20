@@ -21,7 +21,7 @@ def getChord ():
     chord_label.delete("1.0", "end")
 
     if wheel == "1":
-        w1 = ["B  ", "C#m", "D#m", "E  ", "F#  ", "G#m"]
+        w1 = ["  B  ", "C#m", "D#m", "  E  ", " F#  ", "G#m"]
         chord =  w1[random.randint(0, len(w1)-1)]
         w1 = "\n".join(w1)
         chord_label.insert("end", w1)
@@ -30,7 +30,7 @@ def getChord ():
         end_chord = f"1.{index+len(chord)}"
         chord_label.tag_add("highlight", start_chord, end_chord)
     elif wheel == "2":
-        w2 = ["C   ", "DDm ", "Em ", "F   ", "G   ", "Am "]
+        w2 = ["  C   ", " DDm ", " Em ", "  F  ", "  G  ", " Am "]
         chord =  w2[random.randint(0, len(w2)-1)]
         w2 = "\n".join(w2)
         chord_label.insert("end", w2)
@@ -39,7 +39,7 @@ def getChord ():
         end_chord = f"1.{index+len(chord)}"
         chord_label.tag_add("highlight", start_chord, end_chord)
     elif wheel  == "3":
-        w3 = ["D♭ ", "E♭m", "Fm ", "G♭ ", "A♭ ", "B♭m"]   
+        w3 = [" D♭ ", "E♭m", " Fm ", " G♭ ", " A♭ ", " B♭m"]   
         chord =  w3[random.randint(0, len(w3)-1)]
         w3 = "\n".join(w3)
         chord_label.insert("end", w3)
@@ -49,7 +49,7 @@ def getChord ():
         chord_label.tag_add("highlight", start_chord, end_chord)
 
     elif wheel == "4":
-        w4 = ["D  ", "Em ", "F#m ", "G  ", "A  ", "Bm "]
+        w4 = ["  D  ", " Em ", "F#m", "  G  ", "  A  ", " Bm "]
         chord =  w4[random.randint(0, len(w4)-1)]
         w4 = "\n".join(w4)
         chord_label.insert("end", w4)
@@ -58,7 +58,7 @@ def getChord ():
         end_chord = f"1.{index+len(chord)}"
         chord_label.tag_add("highlight", start_chord, end_chord)
     else:
-        w5 = ["E♭ ", "Fm ", "Gm ", "A♭ ", "B♭ ", "Cm "]
+        w5 = [" E♭ ", " Fm ", " Gm ", " A♭ ", " B♭ ", " Cm "]
         chord =  w5[random.randint(0, len(w5)-1)]
         w5 = "\n".join(w5)
         chord_label.insert("end", w5)
@@ -121,6 +121,13 @@ lbracket = Image.open(lbracket_path)
 tklbracket = ctk.CTkImage(lbracket, size = (100, 300))
 lbracketImage = ctk.CTkLabel(chord_frame, image=tklbracket, text="")
 lbracketImage.pack( side="left", pady=10, padx=100)
+
+#dot test
+dot_path = "dot.png"
+dot = Image.open(dot_path)
+tkdot = ctk.CTkImage(dot, size = (80, 80))
+dotImage = ctk.CTkLabel(chord_frame, image=tkdot, text="", fg_color= "transparent" )
+dotImage.place( x=100, y=0)
 
 # Adding Sound Button label 
 sound = ctk.CTkButton (app, text="Play Sound", command = getChord)
