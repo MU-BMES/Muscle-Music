@@ -1,0 +1,28 @@
+import pygame
+from PIL import Image, ImageDraw
+
+pygame.init()
+WINDOW_WIDTH, WINDOW_HEIGHT = 1200, 750
+WINDOW = pygame.display.set_mode((WINDOW_WIDTH, WINDOW_HEIGHT))
+pygame.display.set_caption("Muscle-Music")
+CLOCK = pygame.time.Clock()
+player_input = {"left": False, "right": False, "up": False, "down": False}
+
+def check_input(key, val):
+    if key == pygame.K_LEFT:
+        player_input["left"] = val
+
+while True:
+
+    
+    pygame.display.update()
+    CLOCK.tick(60)
+    for event in pygame.event.get():
+        if event.type == pygame.QUIT:
+            pygame.quit()
+            exit()
+        elif event.type == pygame.KEYDOWN:
+            check_input(event.key, True)
+        elif event.type == pygame.KEYUP:
+            check_input(event.key, False)
+             
