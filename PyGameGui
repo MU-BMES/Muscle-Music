@@ -4,8 +4,10 @@ import math
 pygame.init()
 pygame.font.get_init()
 
-FONT = pygame.font.Font("assets/font.otf", 25)          
-FONT_LARGE = pygame.font.Font("assets/font.otf", 45)                       
+#fonts
+FONT = pygame.font.Font("assets/Music.ttf", 33)          
+FONT_START = pygame.font.Font("assets/Start.otf", 45)                       
+FONT_WHEEL = pygame.font.Font("assets/Wheel.ttf", 80)                       
 
 
 #CONSTATNTS 
@@ -13,40 +15,50 @@ WINDOW_WIDTH, WINDOW_HEIGHT = 1280, 720
 BLACK = (0, 0, 0)
 WHITE = (255, 255, 255)
 
-
+#window setup
 WINDOW = pygame.display.set_mode((WINDOW_WIDTH, WINDOW_HEIGHT))
 pygame.display.set_caption("Muscle-Music")
 
 CLOCK = pygame.time.Clock()
 
+#constants 
 player_input = {"one": False, "two": False, "three": False, "four": False, "five": False, "six": False, "space": False}
-wheel = 1
-wheel_text = FONT_LARGE.render(str(wheel), True, BLACK)
-menu = pygame.transform.scale(pygame.image.load("assets/Menu.PNG"), (WINDOW_WIDTH, WINDOW_HEIGHT))
-background = pygame.transform.scale(pygame.image.load("assets/background1.PNG"), (WINDOW_WIDTH, WINDOW_HEIGHT))
-
 highlights = []
 texts = []
-chords = ["B  ", "C#m", "D#m", "E  ", "F#  ", "G#m"]
+chords = ["B", "C#m", "D#m", "E", "F#", "G#m"]
+
+wheel_text = FONT_WHEEL.render("1", True, BLACK)
+menu = pygame.transform.scale(pygame.image.load("assets/Menu-pixel.PNG"), (WINDOW_WIDTH, WINDOW_HEIGHT))
+background = pygame.transform.scale(pygame.image.load("assets/sunset.PNG"), (WINDOW_WIDTH, WINDOW_HEIGHT))
+
 active_highlight  = False
-exit = False
+exit_title = False
 show = False 
+wheel = 1
 
 
 def check_input(key, val):
-    if key == pygame.K_1 and not active_highlight:
+    global slice
+    if key == pygame.K_1:
+        slice.destroy() if active_highlight == True else None
         slice = Highlight(pygame.image.load("assets/Slice1.Png"))
-    elif key == pygame.K_2 and not active_highlight:
+    elif key == pygame.K_2:
+        slice.destroy() if active_highlight == True else None
         slice = Highlight( pygame.image.load("assets/Slice2.PNG"))
-    elif key == pygame.K_3 and not active_highlight:
+    elif key == pygame.K_3:
+        slice.destroy() if active_highlight == True else None
         slice = Highlight(pygame.image.load("assets/Slice3.PNG"))
-    elif key == pygame.K_4 and not active_highlight:
+    elif key == pygame.K_4:
+        slice.destroy() if active_highlight == True else None
         slice = Highlight( pygame.image.load("assets/Slice4.PNG"))
-    elif key == pygame.K_5 and not active_highlight:
+    elif key == pygame.K_5:
+        slice.destroy() if active_highlight == True else None
         slice = Highlight( pygame.image.load("assets/Slice5.PNG"))
-    elif key == pygame.K_6 and not active_highlight:
+    elif key == pygame.K_6:
+        slice.destroy() if active_highlight == True else None
         slice = Highlight(pygame.image.load("assets/Slice6.PNG"))
-    if key == pygame.K_SPACE and not active_highlight:
+    if key == pygame.K_SPACE:
+        slice.destroy() if active_highlight == True else None
         counter()
     if key == pygame.K_q:
         pygame.quit()
@@ -68,7 +80,7 @@ class Text(Object):
         self.countdown = 0
 
     def draw(self):
-        WINDOW.blit(FONT_LARGE.render(self.text, True, BLACK), (self.xpos, self.ypos))
+        WINDOW.blit(FONT_START.render(self.text, True, BLACK), (self.xpos, self.ypos))
 
     def flash(self, num):
         global show
@@ -96,8 +108,7 @@ class Highlight(Object):
     def update (self):
         self.draw()
         self.countdown += 1 
-        print(self.countdown)
-        if self.countdown >= 60:
+        if self.countdown >= 30:
             self.destroy()
 
     def destroy(self):
@@ -109,22 +120,22 @@ class Highlight(Object):
 def load_chords ():
     global chords
     if wheel == 1: 
-        chords = ["B  ", "C#m", "D#m", "E  ", "F#  ", "G#m"]
+        chords = ["B", "C#m", "D#m", "E", "F#", "G#m"]
     elif wheel == 2:
-        chords = ["C   ", "DDm ", "Em ", "F   ", "G   ", "Am "]
+        chords = ["C", "Dm", "Em", "F", "G", "Am"]
     elif wheel == 3:
-        chords = ["D♭ ", "E♭m", "Fm ", "G♭ ", "A♭ ", "B♭m"]
+        chords = ["D♭", "E♭m", "Fm", "G♭", "A♭", "B♭m"]
     elif wheel == 4:
-        chords =  ["D  ", "Em ", "F#m ", "G  ", "A  ", "Bm "]
+        chords =  ["D", "Em", "F#m", "G", "A", "Bm"]
     elif wheel == 5:
-        chords = ["E♭ ", "Fm ", "Gm ", "A♭ ", "B♭ ", "Cm "]
+        chords = ["E♭", "Fm", "Gm", "A♭", "B♭", "Cm"]
 
 def print_chords():
     angle = 15
-    radius = 220
+    radius = 230
     for chord in chords:
         text = FONT.render(chord, True, BLACK)
-        x = WINDOW_WIDTH//2 - radius * math.cos(math.radians(angle))  - 10
+        x = WINDOW_WIDTH//2 - radius * math.cos(math.radians(angle))  - text.get_width()//2
         y = WINDOW_HEIGHT//2 - radius * math.sin(math.radians(angle))
         WINDOW.blit(text, (x, y))
         angle += 30
@@ -136,26 +147,27 @@ def counter():
     else:
         wheel += 1
     global wheel_text
-    wheel_text = FONT_LARGE.render(str(wheel), True, BLACK)
+    wheel_text = FONT_WHEEL.render(str(wheel), True, BLACK)
 
 
-start_text = Text("Press SPACE to start", 350, 566)
-while exit == False:
+start_text = Text("Press SPACE to start", 400, 500)
+slice = Highlight(pygame.image.load("assets/Slice1.Png"))
+slice.destroy()
+while exit_title == False:
     WINDOW.blit(menu, (0, 0))
     CLOCK.tick(60)
     for event in pygame.event.get():
         if event.type == pygame.KEYDOWN:
-                if event.key == pygame.K_SPACE:
-                    print("attempt to exit")
-                    exit = True
-                if event.key == pygame.K_q:
+                if event.type == pygame.QUIT:
                     pygame.quit()
                     exit() 
+                if event.key == pygame.K_SPACE:
+                    exit_title = True
+                if event.key == pygame.K_q:
+                    pygame.quit()
+                    exit()
     start_text.flash(60)
     pygame.display.update()
-
-
-print("exited loop")
 
 while True:
     WINDOW.blit(background, (0, 0))
