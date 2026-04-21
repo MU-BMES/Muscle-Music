@@ -136,13 +136,13 @@ def print_chords():
     for chord in chords:
         text = FONT.render(chord, True, BLACK)
         x = WINDOW_WIDTH//2 - radius * math.cos(math.radians(angle))  - text.get_width()//2
-        y = WINDOW_HEIGHT//2 - radius * math.sin(math.radians(angle))
+        y = WINDOW_HEIGHT//2 - radius * math.sin(math.radians(angle)) -  text.get_height()//2
         WINDOW.blit(text, (x, y))
         angle += 30
 
 def counter():
     global wheel
-    if wheel >= 5:
+    if wheel >= 3:
         wheel = 1
     else:
         wheel += 1
