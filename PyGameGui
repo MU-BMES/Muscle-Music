@@ -1,9 +1,11 @@
 import pygame
+from pygame import mixer
 import math
 import serial
 import soundfile as sf
 import sounddevice as sd
 
+mixer.init()
 pygame.init()
 pygame.font.get_init()
 
@@ -46,35 +48,69 @@ chord = ""
 
 def check_input(key, val):
     global slice
+    global wheel
     global chord_num
+    global wheel_text
     if key == pygame.K_1:
         slice.destroy() if active_highlight == True else None
         slice = Highlight(pygame.image.load("assets/slice/Slice1.PNG"))
         chord_num = 0
+        mixer.music.load("assets/sounds/" + chords[6] + "/" + chords[chord_num]  + ".wav")
+        mixer.music.play()
     elif key == pygame.K_2:
         slice.destroy() if active_highlight == True else None
         slice = Highlight( pygame.image.load("assets/slice/Slice2.PNG"))
         chord_num = 1
+        mixer.music.load("assets/sounds/" + chords[6] + "/" + chords[chord_num]  + ".wav")
+        mixer.music.play()        
     elif key == pygame.K_3:
         slice.destroy() if active_highlight == True else None
         slice = Highlight(pygame.image.load("assets/slice/Slice3.PNG"))
         chord_num = 2
+        mixer.music.load("assets/sounds/" + chords[6] + "/" + chords[chord_num]  + ".wav")
+        mixer.music.play()
     elif key == pygame.K_4:
         slice.destroy() if active_highlight == True else None
         slice = Highlight( pygame.image.load("assets/slice/Slice4.PNG"))
         chord_num = 3
+        mixer.music.load("assets/sounds/" + chords[6] + "/" + chords[chord_num]  + ".wav")
+        mixer.music.play()
     elif key == pygame.K_5:
         slice.destroy() if active_highlight == True else None
         slice = Highlight( pygame.image.load("assets/slice/Slice5.PNG"))
         chord_num = 4
+        mixer.music.load("assets/sounds/" + chords[6] + "/" + chords[chord_num]  + ".wav")
+        mixer.music.play()
     elif key == pygame.K_6:
         slice.destroy() if active_highlight == True else None
         slice = Highlight(pygame.image.load("assets/slice/Slice6.PNG"))
         chord_num = 5
+        mixer.music.load("assets/sounds/" + chords[6] + "/" + chords[chord_num]  + ".wav")
+        mixer.music.play()
+    elif key == pygame.K_y:
+        slice.destroy() if active_highlight == True else None
+        wheel= 1
+        wheel_text = FONT_WHEEL.render(str(wheel), True, BLACK)
+    elif key == pygame.K_u:
+        slice.destroy() if active_highlight == True else None
+        wheel = 2
+        wheel_text = FONT_WHEEL.render(str(wheel), True, BLACK)
+    elif key == pygame.K_i:
+        slice.destroy() if active_highlight == True else None
+        wheel = 3
+        wheel_text = FONT_WHEEL.render(str(wheel), True, BLACK)
+    elif key == pygame.K_o:
+        slice.destroy() if active_highlight == True else None
+        wheel = 4
+        wheel_text = FONT_WHEEL.render(str(wheel), True, BLACK)
+    elif key == pygame.K_p:
+        slice.destroy() if active_highlight == True else None
+        wheel = 5
+        wheel_text = FONT_WHEEL.render(str(wheel), True, BLACK)
     if key == pygame.K_SPACE:
         slice.destroy() if active_highlight == True else None
         counter()
-    if key == pygame.K_q:
+    if key == pygame.K_ESCAPE:
         pygame.quit()
         exit()
 
@@ -126,6 +162,7 @@ class Highlight(Object):
             self.destroy()
 
     def destroy(self):
+        mixer.music.stop()
         global chord_num
         chord_num = -1
         highlights.pop(0)
@@ -198,7 +235,7 @@ while True:
     WINDOW.blit(background, (0, 0))
     WINDOW.blit(fingering, (0, 235))
     WINDOW.blit(wheel_text, (WINDOW_WIDTH//2 - wheel_text.get_width()//2, WINDOW_HEIGHT//2 - wheel_text.get_height()))
-    CLOCK.tick(60)
+    CLOCK.tick(120)
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
             pygame.quit()
