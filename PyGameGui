@@ -1,9 +1,6 @@
 import pygame
 from pygame import mixer
 import math
-import serial
-import soundfile as sf
-import sounddevice as sd
 
 mixer.init()
 pygame.init()
