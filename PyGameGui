@@ -216,16 +216,14 @@ while exit_title == False:
     WINDOW.blit(menu, (0, 0))
     CLOCK.tick(60)
     for event in pygame.event.get():
+        if event.type == pygame.QUIT:
+            pygame.quit()
+            exit()
         if event.type == pygame.KEYDOWN:
-                if event.type == pygame.QUIT:
-                    pygame.quit()
-                    exit() 
                 if event.key == pygame.K_SPACE:
                     exit_title = True
-                if event.key == pygame.K_q:
-                    pygame.quit()
-                    exit()
-    start_text.flash(60)
+
+    start_text.flash(45)
     pygame.display.update()
 
 while True:
@@ -238,8 +236,7 @@ while True:
             pygame.quit()
             exit()
         elif event.type == pygame.KEYDOWN:
-            check_input(event.key, True)
-
+            check_input(event.key, True)    
     highlights[0].update() if len(highlights) > 0 else None
     
     set_fingering()
